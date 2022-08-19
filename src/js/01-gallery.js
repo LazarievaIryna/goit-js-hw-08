@@ -1,5 +1,6 @@
 // Add imports above this line
 import SimpleLightbox from 'simplelightbox';
+
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { galleryItems } from './gallery-items';
 // Change code below this line
@@ -27,22 +28,26 @@ function createGalleryCard(cards) {
 </div>`;
     })
     .join("");
+  
 }
 console.log(galleryItems);
 
-galleryEl.addEventListener("click", onCardClick);
+// galleryEl.addEventListener("click", onCardClick);
 
-function onCardClick(event) {
-    event.preventDefault();
+// function onCardClick(event) {
+//     event.preventDefault();
 
-    if (!event.target.classList.contains("gallery__image")) {
-        return;
-    }
-    const originalImg = event.target.dataset.source;
+//     if (!event.target.classList.contains("gallery__image")) {
+//         return;
+//     }
+//     const originalImg = event.target.dataset.source;
 
-    //add from basicLightbox
-    const modalWindow = new SimpleLightbox(`
+//     //add from basicLightbox
     
-`);
-    modalWindow.show();
-}
+//     modalWindow.show();
+// }
+let modalWindow = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+console.log(modalWindow)
