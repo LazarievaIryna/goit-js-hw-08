@@ -1,10 +1,11 @@
 import Player from '@vimeo/player';
 const throttle = require('lodash.throttle');
+const STORAGE_KEY = 'videoplayer-current-time';
 const iframe = document.querySelector('iframe');
 
 const player = new Player(iframe);
 console.log(player);
-const STORAGE_KEY = 'videoplayer-current-time';
+
 player.on(
   'timeupdate',
   throttle(data => {
@@ -15,16 +16,7 @@ player.on(
 );
 const savedTime = localStorage.getItem(STORAGE_KEY);
 console.log(savedTime);
-
-player
-  .setCurrentTime(savedTime)
-  .then(function (seconds) {})
-  .catch(function (error) {
-    switch (error.name) {
-      case 'RangeError':
-        break;
-
-      default:
-        break;
-    }
-  });
+if (savedTime === null) {
+  return;
+}
+player.setCurrentTime(savedTime);
